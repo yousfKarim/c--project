@@ -1,0 +1,185 @@
+.seasonal{
+
+color: rgb(218, 168, 40);
+font-size: 10px;
+}
+.art{
+    font-size: x-large;
+
+}
+.slow{
+    font-size: xx-large;
+}
+.text{
+    font-size: small;
+   
+}
+.image{
+position: relative;
+}
+.image img{
+position: absolute;
+top: -90px;
+left: 900px;
+width: 250px;
+height: 300px;
+transform:rotate(5deg);
+}
+body{
+    background-repeat: no-repeat;
+    background-size:250px 300px;
+    background-position:905px 35px;;
+    margin-top: 3%;
+}
+ 
+.button{
+    background-color: rgb(26, 10, 83);
+    color:white;
+    display: inline-block;
+    text-decoration:none;
+    cursor:pointer;
+    border-radius:20px;
+    
+}
+.button1{
+      color:rgb(0, 0, 11);
+      font-style: italic;
+    display: inline-block;
+    text-decoration:none;
+    cursor:pointer;
+    border-radius:20px;
+
+}
+.curated{
+    font-size:25px;
+}
+
+
+.archive{
+    font-size:12px;
+}
+.button2{
+    background-image: url(/*"images.jpg"*/);
+    background-repeat: no-repeat;
+    background-size: 150px ;
+    display: inline-block;
+    text-decoration:none;
+    cursor:pointer;
+    width:400px;
+    height:180px;
+    color: white;
+}
+.button3{
+    background-image: url(/*"img.jpg"*/);
+    background-repeat: no-repeat;
+    background-size: 150px ;
+    display: inline-block;
+    text-decoration:none;
+    cursor:pointer;
+    width:200px;
+    height:90px;
+    color: white;
+    border-color: white;
+    transform:translateY(-48px)translateX(-4px);
+}
+.button4{
+    background-image: url(/*"po.jpg"*/);
+    background-repeat: no-repeat;
+    background-size: 150px ;
+    display: inline-block;
+    text-decoration:none;
+    cursor:pointer;
+    width:200px;
+    height:90px;
+    color: white;
+ border-color: white;
+  transform:translateY(-48px)translateX(-9px);
+}
+.button5{   
+    background-repeat: no-repeat;
+    background-size: 150px ;
+    display: inline-block;
+    text-decoration:none;
+    cursor:pointer;
+    width:400px;
+    height:97px;
+    color: white;
+ background-color:rgb(221, 199, 3);
+  transform:translateY(36px) translateX(-410px);
+  border-color: white;
+}
+.book1{
+    width: 150px;
+    height: 200px;
+}
+.book2{
+    width: 150px;
+    height: 200px;
+}
+.book3{
+    width: 150px;
+    height: 200px;
+}
+.book4{ 
+    width: 150px;
+    height: 200px;
+}
+.books{
+    display: flex;
+    flex-direction:row;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.p1,
+.p2,
+.p3{
+    width: 200px;
+    text-align: center;
+    background: #fff;
+    padding:15px;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    transform: translateX(-70px);
+ 
+   
+}
+.p1 a,.p2 a,.p3 a{
+       text-decoration: none;
+    color:inherit;
+}
+
+.p1 img, .p2 img, .p3 img, .p4 img {
+    width: 100%;
+    height: auto;
+   cursor:pointer;
+}
+.p1:hover, .p2:hover, .p3:hover{
+    
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+.book_title{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0 5px;
+    color: #000000;
+}
+.price{
+    font-size: 16px;
+    font-weight:bold;
+    color: #666666;
+    display:block;
+    margin:5px 0;
+}
+.add{
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top:10px;
+}
+.add-btn:hover{
+    background-color:#333;
+}
