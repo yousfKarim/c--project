@@ -1,0 +1,123 @@
+/* --- الإعدادات العامة --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9f8f6;
+    color: #333;
+    padding-bottom: 80px;
+    direction: ltr;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- الهيدر --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 60px 0 40px;
+}
+
+h1 { font-family: serif; font-size: 2.8rem; font-weight: normal; }
+.header-content p { font-style: italic; color: #666; font-size: 1.1rem; }
+.sort-by { font-size: 0.8rem; font-weight: bold; }
+.sort-by select { border: none; background: none; font-weight: bold; cursor: pointer; }
+
+/* --- شبكة المنتجات --- */
+.grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 40px; 
+}
+
+/* --- تنسيق الكتاب كـ رابط (The Link Card) --- */
+.book-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none; /* إزالة الخط السفلي الأزرق */
+    color: inherit; /* جعل لون النص طبيعي */
+    transition: all 0.3s ease;
+}
+
+.book-image-wrapper { 
+    height: 480px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative; 
+    border-radius: 6px; 
+    margin-bottom: 20px; 
+    overflow: hidden;
+    background-color: #eee;
+}
+
+/* تأثير عند تمرير الماوس على الكتاب */
+.book-card:hover .book-cover, 
+.book-card:hover .placeholder-book {
+    transform: translateY(-15px) scale(1.02);
+}
+
+.book-card:hover h3 {
+    color: #8c734b; /* تغيير لون العنوان عند التأشير */
+}
+
+/* --- تفاصيل الأغلفة والخلفيات --- */
+.bg-teal { background-color: #e9eff1; }
+.bg-tan { background-color: #f6e9d6; }
+.bg-light { background-color: #f0f0f0; }
+.bg-dark-forest { background-color: #0d1b1e; }
+.bg-gray-soft { background-color: #f4f4f4; }
+
+.book-cover-img {
+    width: 240px;      /* نفس عرض الغلاف السابق */
+    height: 340px;     /* نفس طول الغلاف السابق */
+    object-fit: cover; /* لضمان عدم تمدد الصورة بشكل سيء */
+    box-shadow: 15px 20px 40px rgba(0,0,0,0.25); /* الظل ليظهر الكتاب بشكل واقعي */
+    transition: transform 0.3s ease;
+}
+
+/* تأثير عند تمرير الماوس على الكتاب */
+.book-card:hover .book-cover-img {
+    transform: translateY(-15px) scale(1.02);
+}
+
+.cover-teal { background-color: #1a6d8c; display: flex; align-items: center; justify-content: center; color: white; }
+.cover-linen { background-color: #a8a08a; border-left: 5px solid rgba(0,0,0,0.1); }
+.cover-white { background-color: #fff; display: flex; align-items: center; justify-content: center; border: 1px solid #eee; }
+.cover-mint { background-color: #b5c7c1; position: relative; width: 200px; height: 300px; }
+
+.placeholder-book {
+    width: 85%; height: 300px; background: #222; color: #fff; 
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 0.7rem; box-shadow: 10px 10px 30px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease;
+}
+.placeholder-book.tilted { transform: rotate(-3deg); background: #4a2c2a; border-bottom: 10px solid #d4b483; }
+
+/* --- الشارات والمعلومات --- */
+.badge { position: absolute; top: 20px; left: 20px; background: #eec13b; padding: 6px 12px; font-size: 0.7rem; font-weight: bold; }
+.badge.bottom { top: auto; bottom: 20px; background: #fff; border: 1px solid #ddd; }
+.badge.rare { background: #1a2a3a; color: #fff; border-radius: 3px; }
+
+.title-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.title-row h3 { font-family: serif; font-size: 1.3rem; font-weight: normal; transition: color 0.3s; }
+.price { font-size: 1.1rem; color: #333; }
+.author { color: #888; font-size: 0.95rem; margin-bottom: 8px; }
+.rating { font-size: 0.85rem; color: #555; }
+
+/* --- الترقيم --- */
+.pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid #e0e0e0; }
+.nav-btn { text-decoration: none; color: #333; font-weight: bold; font-size: 0.85rem; }
+.page-numbers { display: flex; gap: 15px; align-items: center; }
+.page-link { text-decoration: none; color: #888; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
+.page-link.active { background-color: #8c734b; color: white; }
+.page-link:hover:not(.active) { background-color: #eee; }

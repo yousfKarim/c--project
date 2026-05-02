@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start With Why – The Literary Curator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* التنسيقات مطابقة لهوية الموقع */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #f9f8f6;
+            --dark: #111;
+            --gold: #8c734b;
+            --gold-light: #eec13b;
+            --text: #333;
+            --muted: #888;
+            --border: #e5e2dc;
+            --card-bg: #fff;
+            --nav-bg: #fff;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        nav {
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 62px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--dark); text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+        .nav-links a.active, .nav-links a:hover { color: var(--dark); }
+        .nav-links a.active { border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+
+        .nav-icons { display: flex; gap: 18px; align-items: center; }
+        .nav-icons svg { width: 20px; height: 20px; cursor: pointer; color: var(--muted); transition: color 0.2s; }
+
+        .breadcrumb { max-width: 1200px; margin: 20px auto 0; padding: 0 40px; font-size: 0.78rem; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; }
+        .breadcrumb span { color: var(--text); font-weight: 500; }
+
+        /* Main Layout */
+        .product-page {
+            max-width: 1200px;
+            margin: 28px auto 80px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .gallery-main {
+            background: #0b1a11; /* Dark Forest */
+            border-radius: 8px;
+            height: 460px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .gallery-main img {
+            width: 230px;
+            height: 340px;
+            object-fit: cover;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-main:hover img { transform: translateY(-8px) scale(1.02); }
+
+        .badge-rare {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: #eec13b;
+            color: #1a1000;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            text-transform: uppercase;
+        }
+
+        .gallery-thumbs { display: flex; gap: 10px; }
+        .thumb { width: 80px; height: 80px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: border-color 0.2s; }
+        .thumb.active { border-color: var(--gold); }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Info Styling */
+        .product-author { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+        .product-publisher { font-size: 0.78rem; color: var(--muted); float: right; margin-top: -22px; }
+        .product-title { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; line-height: 1.15; color: var(--dark); margin-bottom: 14px; clear: both; }
+
+        .rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+        .stars { color: var(--gold-light); font-size: 1rem; letter-spacing: 2px; }
+        .rating-count { font-size: 0.82rem; color: var(--muted); }
+
+        .price-block { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+        .price-current { font-size: 1.8rem; font-weight: 700; color: var(--dark); }
+        .stock-note { font-size: 0.8rem; color: #4caf50; display: flex; align-items: center; gap: 5px; }
+        .stock-note::before { content: ''; width: 7px; height: 7px; background: #4caf50; border-radius: 50%; display: inline-block; }
+
+        /* Actions */
+        .actions { display: flex; gap: 12px; margin: 20px 0 28px; }
+        .btn-add { flex: 1; background: var(--dark); color: white; border: none; padding: 14px 24px; font-weight: 600; text-transform: uppercase; cursor: pointer; border-radius: 4px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.2s; }
+        .btn-add:hover { background: var(--gold); }
+        .btn-wish { width: 50px; height: 50px; border: 1px solid var(--border); background: white; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .synopsis-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+        .synopsis-text { font-size: 0.92rem; line-height: 1.75; color: #555; margin-bottom: 28px; font-style: italic; }
+
+        .details-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 28px; }
+        .detail-cell { background: white; padding: 14px 16px; }
+        .detail-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+        .detail-value { font-size: 0.9rem; font-weight: 600; color: var(--dark); }
+
+        /* Reader's Circle */
+        .reviews-section { max-width: 1200px; margin: 0 auto 80px; padding: 0 40px; }
+        .section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .review-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+        .reviewer-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .avatar { width: 38px; height: 38px; border-radius: 50%; background: #0b1a11; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+        .review-stars { color: var(--gold-light); font-size: 0.85rem; margin-bottom: 10px; }
+        .review-text { font-size: 0.86rem; line-height: 1.7; color: #555; font-style: italic; }
+
+        footer { border-top: 1px solid var(--border); padding: 40px; display: flex; justify-content: center; font-size: 0.78rem; color: var(--muted); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="P1.html" class="nav-logo">The Literary Curator</a>
+    <ul class="nav-links">
+        <li><a href="#">Fiction</a></li>
+        <li><a href="#">Business</a></li>
+        <li><a href="#">Kids</a></li>
+        <li><a href="P1.html" class="active">Collections</a></li>
+    </ul>
+    <div class="nav-icons">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </div>
+</nav>
+
+<div class="breadcrumb">
+    <a href="#">Archive</a> › <a href="P1.html">Collections</a> › <span>Start With Why</span>
+</div>
+
+<div class="product-page">
+    <div class="gallery">
+        <div class="gallery-main">
+            <span class="badge-rare">Rare Find</span>
+            <img src="P.image/71QUhm-AnIL.jpg" alt="Start With Why Cover" id="main-img">
+        </div>
+        <div class="gallery-thumbs">
+            <div class="thumb active"><img src="P.image/71QUhm-AnIL.jpg" alt="Cover 1"></div>
+        </div>
+    </div>
+
+    <div class="product-info">
+        <p class="product-author">Simon Sinek <span class="product-publisher">Penguin Books</span></p>
+        <h1 class="product-title">Start With Why</h1>
+
+        <div class="rating-row">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-count">700 Reviews</span>
+        </div>
+
+        <div class="price-block">
+            <span class="price-current">$20.00</span>
+        </div>
+        <p class="stock-note">In stock and ready for dispatch</p>
+
+        <div class="actions">
+            <button class="btn-add" onclick="addToCart(this)">Add to Cart</button>
+            <button class="btn-wish" onclick="toggleWish(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+        </div>
+
+        <p class="synopsis-label">Synopsis</p>
+        <p class="synopsis-text">
+            "Start With Why shows that the leaders who've had the greatest influence in the world all think, act, and communicate the same way — and it's the opposite of what everyone else does. Sinek calls this powerful idea The Golden Circle."
+        </p>
+
+        <div class="details-grid">
+            <div class="detail-cell"><p class="detail-label">ISBN-13</p><p class="detail-value">978-1591846444</p></div>
+            <div class="detail-cell"><p class="detail-label">Edition</p><p class="detail-value">Paperback</p></div>
+            <div class="detail-cell"><p class="detail-label">Language</p><p class="detail-value">English</p></div>
+            <div class="detail-cell"><p class="detail-label">Pages</p><p class="detail-value">256 pages</p></div>
+        </div>
+    </div>
+</div>
+
+<section class="reviews-section">
+    <div class="section-header"><h2 class="section-title">The Reader's Circle</h2></div>
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="reviewer-row"><div class="avatar">DA</div><p class="name">Daniel A.</p></div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">This book completely shifted my perspective on leadership. It's simple yet incredibly profound.</p>
+        </div>
+        <div class="review-card">
+            <div class="reviewer-row"><div class="avatar" style="background:#8c734b;">LM</div><p class="name">Laura M.</p></div>
+            <div class="review-stars">★★★★☆</div>
+            <p class="review-text">A must-read for anyone in marketing or management. The Golden Circle is a game-changer.</p>
+        </div>
+        <div class="review-card">
+            <div class="reviewer-row"><div class="avatar" style="background:#546e7a;">RK</div><p class="name">Ryan K.</p></div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">I've bought this book for my entire team. It helps us stay focused on what really matters.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 The Literary Curator — <a href="P1.html" style="color: inherit; text-decoration: none;">Back to Collections</a></p>
+</footer>
+
+<script>
+    function addToCart(btn) {
+        btn.innerHTML = '✓ Added to Cart';
+        btn.style.background = '#2e7d32';
+        setTimeout(() => { btn.innerHTML = 'Add to Cart'; btn.style.background = ''; }, 2000);
+    }
+    function toggleWish(btn) {
+        const svg = btn.querySelector('svg');
+        const isFilled = svg.getAttribute('fill') !== 'none';
+        svg.setAttribute('fill', isFilled ? 'none' : '#e53935');
+        svg.setAttribute('stroke', isFilled ? 'currentColor' : '#e53935');
+    }
+</script>
+
+</body>
+</html>
