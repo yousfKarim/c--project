@@ -1,0 +1,6 @@
+/workspaces/c--project/obj/Release/net10.0/c--project.csproj.AssemblyReference.cache
+/workspaces/c--project/obj/Release/net10.0/c--project.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/c--project/obj/Release/net10.0/c--project.AssemblyInfoInputs.cache
+/workspaces/c--project/obj/Release/net10.0/c--project.AssemblyInfo.cs
+/workspaces/c--project/obj/Release/net10.0/c--project.csproj.CoreCompileInputs.cache
+/workspaces/c--project/obj/Release/net10.0/c--project.sourcelink.json
