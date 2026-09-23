@@ -145,6 +145,36 @@
   .project ul li{margin-bottom:4px;}
   .project ul li::marker{color:var(--muted);}
 
+  .project-gallery{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-top:14px;
+  }
+  .project-gallery button{
+    border:1px solid var(--line); background:var(--ink-raised); padding:0; cursor:pointer;
+    border-radius:3px; overflow:hidden; aspect-ratio:4/3; display:block; width:100%;
+  }
+  .project-gallery img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .project-gallery button:hover img{transform:scale(1.04); opacity:.9;}
+  .project-gallery button:focus-visible{outline:2px solid var(--amber); outline-offset:2px;}
+
+  .lightbox{
+    position:fixed; inset:0; background:rgba(10,12,16,0.9);
+    display:none; align-items:center; justify-content:center; z-index:50; padding:24px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:min(90vw, 900px); max-height:82vh; border:1px solid var(--line); border-radius:4px;}
+  .lightbox button.close{
+    position:absolute; top:22px; right:24px; background:none; border:1px solid var(--line);
+    color:var(--paper); font-family:var(--mono); font-size:13px; padding:6px 12px; border-radius:3px; cursor:pointer;
+  }
+  .lightbox button.close:hover{border-color:var(--amber); color:var(--amber);}
+
+  @media (max-width:640px){
+    .project-gallery{grid-template-columns:repeat(2, 1fr);}
+  }
+
   /* ---------- competitive programming ---------- */
   #cp ul{list-style:none;}
   #cp li{
@@ -322,6 +352,31 @@
         <li>Used Node.js to handle backend connectivity and database operations.</li>
       </ul>
     </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>the-literary-curator</h3>
+        <span class="project-stack">HTML · CSS · JavaScript</span>
+      </div>
+      <ul>
+        <li>Designed and built an online bookstore concept — product detail pages, curated collections, and a browsable catalog.</li>
+        <li>Implemented paginated book listings with cover art, pricing, ratings, and stock status.</li>
+      </ul>
+      <div class="project-gallery">
+        <button type="button" data-full="1.jpg" aria-label="Open screenshot 1">
+          <img src="1.jpg" alt="The Literary Curator — book detail page" loading="lazy">
+        </button>
+        <button type="button" data-full="2.jpg" aria-label="Open screenshot 2">
+          <img src="2.jpg" alt="The Literary Curator — collection page" loading="lazy">
+        </button>
+        <button type="button" data-full="3.jpg" aria-label="Open screenshot 3">
+          <img src="3.jpg" alt="The Literary Curator — collection page" loading="lazy">
+        </button>
+        <button type="button" data-full="4.jpg" aria-label="Open screenshot 4">
+          <img src="4.jpg" alt="The Literary Curator — home page" loading="lazy">
+        </button>
+      </div>
+    </div>
   </section>
 
   <section id="cp">
@@ -370,6 +425,11 @@
 
 </main>
 
+<div class="lightbox" id="lightbox">
+  <button type="button" class="close" id="lightboxClose">close ✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
 <script>
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -395,6 +455,39 @@
 
     window.addEventListener('scroll', onScroll, {passive:true});
     onScroll();
+  })();
+
+  // Project gallery lightbox
+  (function(){
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var closeBtn = document.getElementById('lightboxClose');
+    var galleryButtons = document.querySelectorAll('.project-gallery button');
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    galleryButtons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var img = btn.querySelector('img');
+        openLightbox(btn.getAttribute('data-full'), img ? img.alt : '');
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeLightbox();
+    });
   })();
 </script>
 
